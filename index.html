@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JSGEO - Indoor Location</title>
+
+		<meta name="description" content="Mobile First Presence Insights">
+		<meta name="author" content="Norman Barker">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/starwars.css">
+		<link rel="stylesheet" href="css/circles.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-state="set_theme">
+					<h1>Indoor Location</h1>
+					<h3>IBM MobileFirst Presence Insights</h3>
+					<p>
+						<small>Norman Barker / <a href="http://twitter.com/normanbarker">@normanbarker</a></small>
+					</p>
+				</section>
+				<section data-state="starwars">
+					<div id="titles"><div id="titlecontent">
+					<p>
+						IBM’s statements regarding its plans, directions, and intent are subject to change or withdrawal without notice at IBM’s sole discretion. 
+						Information regarding potential future products is intended to outline our general product direction and it should not be relied on in making a purchasing decision.
+						The information mentioned regarding potential future products is not a commitment, promise, or legal obligation to deliver any material, code or functionality. Information about potential future products may not be incorporated into any contract.
+						The development, release, and timing of any future features or functionality described for our products remains at our sole discretion.
+						Performance is based on measurements and projections using standard IBM benchmarks in a controlled environment. The actual throughput or performance that any user will experience will vary depending upon many factors, including considerations such as the amount of multiprogramming in the user’s job stream, the I/O configuration, the storage configuration, and the workload processed. Therefore, no assurance can be given that an individual user will achieve results similar to those stated here.
+					</p>
+					</div></div>
+				</section>
+				<section data-state="set_theme">
+					<section>
+						<h2>Indoor Location: Convergence of digital and physical</h3>
+						<h4>Indoor Venues are the next frontier for location based services</h4>
+						<ul>
+						<li>Provide a new platform for in-venue user engagement and experiences</li>
+						<li>Make smart devices responsive to their environment</li>
+						<li>Make the physical world searchable down to the object level</li>
+						<li>Digitize the call for help</li>
+						</ul>
+						<a href="http://blogs.forrester.com/category/indoor_positioning" target="_blank">
+							<img src="img/forrester.png" alt="forrester" style="border-style: none"></img>
+						</a>
+					</section>
+					<section>
+						<h2>Proliferation of sensing infrastructure is exploding</h2>
+						<blockquote cite="http://performancein.com/news/2015/09/07/4000-black-cabs-be-fitted-ibeacons-uk-cities/#sthash.3343urCn.dpuf">
+							&ldquo;Up to 4,000 black cabs are about to be fitted with iBeacons across London and other major UK cities, allowing passengers to receive contextually-relevant messaging as they travel.&rdquo;
+						</blockquote>
+						<img src="img/taxi.png" style="border-style: none"/>
+					</section>
+					<section>
+						<h2>More examples</h2>
+						<ul>
+						<li>Leading hotel chain employs mobile app & beacons for key-less check in process</li>
+						<li>UK based airline deploys beacon and wearables with marketing cloud technology to provide top tier members with more personalized, high-tech concierge experience</li>
+						<li>Top soda manufacturer uses beacons and geolocation services with marketing cloud technology to interact with mobile app</li>
+						<li>Food manufacturer partners with grocery stores and leverages beacon and geolocation services to target customers. Saw 20x increase in sales</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Location Data</h2>
+						<img src="img/locationdata.png" alt="data types" style="border-style: none"/>
+					</section>
+					<section>
+						<h2>Sensing Technology</h2>
+						<img src="img/tech.png" alt="tech types" style="border-style: none"/>
+					</section>
+					<section>
+						<h2>Use Cases</h2>
+						<img src="img/usecases.png" alt="use cases" style="border-style: none"/>
+					</section>
+					<section>
+						<h2>Total Visits</h2>
+						<img src="img/totalvisits.png" alt="total visits" style="border-style: none"/>
+					</section>
+					<section>
+						<h2>Trends</h2>
+						<img src="img/trends.png" alt="trends" style="border-style: none"/>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Issues with location</h2>
+						<ul>
+							<li>Raster floor maps - <i>need to vectorize and overlay zones</i></li>
+							<li>Presence / Position</li>
+							<li>Coordinate Reference Systems</li>
+						</ul>
+						<img src="img/store.png" style="border-style: none"></img>
+					</section>
+					<section>
+						<h2>Raster Maps</h2>
+						<ul>
+							<li>Floor and location maps are typically raster or PDF</li>
+							<li>User has to calibrate map so that a pixel corresponds to a UoM</li>
+							<li>User draws Zones (ROIs) over the map</li>
+							<li>Multiple floors</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Presence / Position</h2>
+						<ul>
+							<li>Location in stores is not accurate</li>
+							<li>Multiple detections - RSSI</li>
+							<li>Counters</li>
+							<li>Presence / near</li>
+							<li>Transform from sensor coordinate to floor</li>
+							<img src="img/store_small.png" style="border-style: none; float: right"></img>
+						</ul>
+						<p><i>RSSI - Received Signal Strength Indicator</i></p>
+					</section>
+					<section>
+						<h2>Coordinate Reference Systems</h2>
+						<ul>
+							<li>Indoor - Cartesian - X/Y/Z</li>
+							<li>Indoor - Need a definition and set of transforms to manage different configurations</li>
+							<li>Outdoor Venues - transform from local coordinates to lat/lon or others</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Community standards</h2>
+						<ul>
+							<li>Fragmented open source projects</li>
+							<li>(Geo)JSON for geometry definitions</li>
+							<ul>
+								<li>Needs circle, semi-circle support</li>
+								<li>Z - in terms of a floor</li>
+								<li>Needs a SRS definition (which was removed)</li>
+							<ul>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>How did we do this?</h2>
+						<img src="img/dev.png" alt="dev" style="border-style: none;"/>
+					</section>
+					<section>
+						<h2>Technologies</h2>
+						<img src="img/logos.png" alt="dev" style="border-style: none;"/>
+					</section>
+					<section>
+						<h2>Spatial Technologies</h2>
+						<ul>
+							<li>RBush</li>
+							<li>Turf</li>
+							<li>Expect Node and Swift bindings for libspatialindex shortly</li>
+							<ul>
+								<li>TPR-Tree</li>
+								<li>MVR-Tree</li>
+								<li>R*-Tree (same as RBush)</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h2>Some of the technical issues</h2>
+						<ul>
+							<li>Managed Cloud Services</li>
+							<ul>
+								<li>Used where possible</li>
+								<li>Established a devops team where it was not</li>
+							</ul>
+							<li>Data Volume and Velocity</li>
+							<ul>
+								<li>Clustering</li>
+								<li>Prompt alerting</li>
+								<li>Flexible analysis of huge volumes of data</li>
+								<li>Needed a spatial index for zones</li>
+								<li>Testing and simulating</li>
+								<ul>
+									<li>Custom tools</li>
+									<li>Clustered <a href="http://locust.io/">Locust</a></li>
+								</ul>
+							</ul>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Mobile</h1>
+						<ul>
+							<li>Opt in</li>
+							<ul>
+								<li>Full app experience!</li>
+							</ul>
+							<img src="img/engage.png" alt="engage" style="border-style: none;"></img>
+						</ul>
+					</section>
+					<section>
+						<h1>Mobile</h1>
+						<ul>
+						<li>No App</li>
+							<ul>
+								<li>You may be tracked anonymously!</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h1>Mobile APIs</h1>
+						<ul>
+							<li>Core Location APIs are available from Apple, Android, HTML5 and Cordova</li>
+							<li>Work with GPS or beacon sensing</li>
+						</ul>
+					</section>
+					<section>
+						<h1>GeoPresence</h1>
+						<ul>
+							<li>Like GeoFencing but on the device</li>
+							<li>Beacon or GPS</li>
+							<li>Alert me when ... </li>
+							<li>Battery aware!</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Bluemix</h2>
+					<img src="img/bluemix.png" alt="bluemix" style="border-style: none"/>
+				</section>
+				<section>
+					<h2>We are hiring!</h2>
+					<a href="https://presenceinsights.ng.bluemix.net/piui/jobs">https://presenceinsights.ng.bluemix.net/piui/jobs</a>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+			Reveal.addEventListener('starwars', function() {
+				document.getElementById('theme').setAttribute('href','css/theme/black.css');
+			} );
+
+			Reveal.addEventListener('set_theme', function() {
+				document.getElementById('theme').setAttribute('href','css/theme/solarized.css');
+			} );
+
+		</script>
+
+	</body>
+</html>
